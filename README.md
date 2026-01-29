@@ -41,10 +41,22 @@ prisma/
 
 ## Setup
 ```bash
+# If pnpm is not available, enable it via Corepack (Node 16+)
+corepack enable
+corepack prepare pnpm@latest --activate
+
 pnpm install
 pnpm prisma:migrate
 pnpm prisma:seed
 pnpm dev
+```
+
+### npm fallback (if pnpm is unavailable)
+```bash
+npm install
+npx prisma migrate dev
+npx prisma db seed
+npm run dev
 ```
 
 ## Env vars
