@@ -1,16 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+import { getBanners, getProducts } from "@/lib/data";
 import { ProductCard } from "@/components/store/product-card";
 import { Badge } from "@/components/ui/badge";
 
 export default async function StoreHome() {
-  const banners = await prisma.banner.findMany({ take: 2 });
-  const products = await prisma.product.findMany({
-    include: { images: true, variants: true },
-    take: 6,
-    orderBy: { createdAt: "desc" },
-  });
+  const banners = await getBanners();
+  const products = await getProducts();
 
   return (
     <div className="space-y-12">

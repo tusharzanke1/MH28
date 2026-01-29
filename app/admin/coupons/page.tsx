@@ -1,8 +1,8 @@
-import { prisma } from "@/lib/prisma";
+import { getAdminCoupons } from "@/lib/data";
 import { AdminDataTable } from "@/components/admin/admin-data-table";
 
 export default async function AdminCoupons() {
-  const coupons = await prisma.coupon.findMany({ orderBy: { expiresAt: "desc" } });
+  const coupons = await getAdminCoupons();
 
   return (
     <div className="space-y-6">

@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { getCategoryBySlug, getProductsByCategory } from "@/lib/data";
 import { ProductCard } from "@/components/store/product-card";
 import { FiltersSidebar } from "@/components/store/filters-sidebar";
 
@@ -7,13 +7,8 @@ export default async function CategoryPage({
 }: {
   params: { slug: string };
 }) {
-  const category = await prisma.category.findUnique({
-    where: { slug: params.slug },
-  });
-  const products = await prisma.product.findMany({
-    where: { categoryId: category?.id },
-    include: { images: true, variants: true },
-  });
+  const category = await getCategoryBySlug(params.slug);
+  const products = await getProductsByCategory(category?.id);
 
   return (
     <div className="container-page grid gap-8 lg:grid-cols-[280px_1fr]">

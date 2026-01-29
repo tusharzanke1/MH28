@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { prisma } from "@/lib/prisma";
+import { getProductBySlug } from "@/lib/data";
 import { PriceTag } from "@/components/store/price-tag";
 import { VariantSelector } from "@/components/store/variant-selector";
 import { Button } from "@/components/ui/button";
@@ -10,10 +10,7 @@ export default async function ProductDetail({
 }: {
   params: { slug: string };
 }) {
-  const product = await prisma.product.findUnique({
-    where: { slug: params.slug },
-    include: { images: true, variants: true, category: true },
-  });
+  const product = await getProductBySlug(params.slug);
 
   if (!product) {
     notFound();

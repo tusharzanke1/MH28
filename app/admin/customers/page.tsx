@@ -1,11 +1,8 @@
-import { prisma } from "@/lib/prisma";
+import { getAdminCustomers } from "@/lib/data";
 import { AdminDataTable } from "@/components/admin/admin-data-table";
 
 export default async function AdminCustomers() {
-  const customers = await prisma.user.findMany({
-    orderBy: { createdAt: "desc" },
-    take: 10,
-  });
+  const customers = await getAdminCustomers();
 
   return (
     <div className="space-y-6">

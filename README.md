@@ -46,6 +46,7 @@ corepack enable
 corepack prepare pnpm@latest --activate
 
 pnpm install
+pnpm prisma:generate
 pnpm prisma:migrate
 pnpm prisma:seed
 pnpm dev
@@ -54,6 +55,7 @@ pnpm dev
 ### npm fallback (if pnpm is unavailable)
 ```bash
 npm install
+npx prisma generate
 npx prisma migrate dev
 npx prisma db seed
 npm run dev
@@ -71,6 +73,8 @@ See `.env.example` for all required variables.
 - `RESEND_API_KEY`: Email provider (optional, logs in dev).
 - `EMAIL_FROM`: Sender email.
 - `S3_*`: Optional storage adapter placeholders.
+
+> **Zero-config mock mode:** If `DATABASE_URL` is not set, the app will fall back to mock data so you can browse the storefront and admin UI without credentials.
 
 ## Deployment
 1. Configure `.env` in your hosting environment.

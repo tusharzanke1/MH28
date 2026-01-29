@@ -1,13 +1,9 @@
-import { prisma } from "@/lib/prisma";
+import { getAdminOrders } from "@/lib/data";
 import { AdminDataTable } from "@/components/admin/admin-data-table";
 import { StatusBadge } from "@/components/admin/status-badge";
 
 export default async function AdminOrders() {
-  const orders = await prisma.order.findMany({
-    include: { user: true },
-    orderBy: { createdAt: "desc" },
-    take: 10,
-  });
+  const orders = await getAdminOrders();
 
   return (
     <div className="space-y-6">

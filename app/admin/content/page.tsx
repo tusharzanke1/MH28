@@ -1,8 +1,8 @@
-import { prisma } from "@/lib/prisma";
+import { getAdminBanners } from "@/lib/data";
 import { AdminDataTable } from "@/components/admin/admin-data-table";
 
 export default async function AdminContent() {
-  const banners = await prisma.banner.findMany({ orderBy: { createdAt: "desc" } });
+  const banners = await getAdminBanners();
 
   return (
     <div className="space-y-6">

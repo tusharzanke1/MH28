@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { searchProducts } from "@/lib/data";
 import { ProductCard } from "@/components/store/product-card";
 import { Input } from "@/components/ui/input";
 
@@ -8,12 +8,7 @@ export default async function SearchPage({
   searchParams: { q?: string };
 }) {
   const query = searchParams.q ?? "";
-  const products = await prisma.product.findMany({
-    where: query
-      ? { title: { contains: query, mode: "insensitive" } }
-      : undefined,
-    include: { images: true, variants: true },
-  });
+  const products = await searchProducts(query);
 
   return (
     <div className="container-page space-y-6">

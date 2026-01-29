@@ -1,11 +1,8 @@
-import { prisma } from "@/lib/prisma";
+import { getAdminMetrics } from "@/lib/data";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export default async function AdminDashboard() {
-  const [orders, products] = await Promise.all([
-    prisma.order.count(),
-    prisma.product.count(),
-  ]);
+  const { orders, products } = await getAdminMetrics();
 
   return (
     <div className="grid gap-6 md:grid-cols-2">

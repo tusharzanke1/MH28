@@ -1,12 +1,9 @@
-import { prisma } from "@/lib/prisma";
+import { getAdminProducts } from "@/lib/data";
 import { AdminDataTable } from "@/components/admin/admin-data-table";
 import { Button } from "@/components/ui/button";
 
 export default async function AdminProducts() {
-  const products = await prisma.product.findMany({
-    include: { category: true },
-    orderBy: { createdAt: "desc" },
-  });
+  const products = await getAdminProducts();
 
   return (
     <div className="space-y-6">
