@@ -46,6 +46,7 @@ corepack enable
 corepack prepare pnpm@latest --activate
 
 pnpm install
+pnpm prisma:generate
 pnpm prisma:migrate
 pnpm prisma:seed
 pnpm dev
