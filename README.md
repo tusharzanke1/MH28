@@ -55,7 +55,6 @@ pnpm dev
 ### npm fallback (if pnpm is unavailable)
 ```bash
 npm install
-npx prisma generate
 npx prisma migrate dev
 npx prisma db seed
 npm run dev
